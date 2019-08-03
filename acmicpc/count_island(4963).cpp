@@ -124,6 +124,7 @@ bool checked[52][52];
 1 0 1 0 1
 1 0 1 1 1
 */
+// BFS
 #include <queue>
 using namespace std;
 queue<pair<int, int>> q;
