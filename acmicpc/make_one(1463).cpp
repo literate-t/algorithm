@@ -18,7 +18,7 @@ dp[N]는 N을 1로 만드는 최소 연산 횟수.
 시작 연산을 어떤 것으로 했을 때 최솟값이 나오는가.
 dp[N]: min(dp[N/3] + 1, dp[N/2] + 1, dp[N-1] + 1)
 */
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #define min(x, y)	((x <= y) ? (x) : (y))
 void ProblemSolved()
