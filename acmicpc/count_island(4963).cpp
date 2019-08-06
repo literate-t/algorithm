@@ -69,82 +69,15 @@ int around_h[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 int island[52][52];
 bool checked[52][52];
 // DFS
-//void DepthSearch(int j, int i)
-//{
-//	for (int k = 0; k < 8; ++k)
-//	{
-//		int ww = j + around_w[k];
-//		int hh = i + around_h[k];
-//		if (island[ww][hh] == 1 && checked[ww][hh] == false) {
-//			checked[ww][hh] = true;
-//			DepthSearch(ww, hh);
-//		}
-//	}
-//}
-//void ProblemSolved()
-//{
-//	int w, h, count;
-//	while (true)
-//	{
-//		scanf("%d", &w); scanf("%d", &h);
-//		if (w == 0 && h == 0) 
-//			break;
-//		for (int i = 1; i <= 50; ++i) {
-//			for (int j = 1; j <= 50; ++j) {
-//				island[j][i] = 0;
-//			}
-//		}
-//		for (int i = 1; i <= h; ++i) {
-//			for (int j = 1; j <= w; ++j) {
-//				scanf("%d", &island[j][i]);
-//			}
-//		}
-//		for (int i = 0; i <= 51; ++i) {
-//			for (int j = 0; j <= 51; ++j) {
-//				checked[j][i] = false;
-//			}
-//		}
-//		count = 0;
-//		for (int i = 1; i <= h; ++i) {
-//			for (int j = 1; j <= w; ++j) {
-//				if (island[j][i] == 1 && checked[j][i] == false) {
-//					checked[j][i] = true;
-//					DepthSearch(j, i);
-//					++count;
-//				}
-//			}
-//		}
-//		printf("%d\n", count);
-//	}
-//}
-
-/*
-1 1 1 0 1
-1 0 1 0 1
-1 0 1 0 1
-1 0 1 1 1
-*/
-// BFS
-#include <queue>
-using namespace std;
-queue<pair<int, int>> q;
-void BreadthFirstSearch(int j, int i)
+void DepthSearch(int j, int i)
 {
-	q.push(make_pair(j, i));
-	while (!q.empty())
+	for (int k = 0; k < 8; ++k)
 	{
-		int first = q.front().first;
-		int second = q.front().second;
-		checked[first][second] = true; // 여기에 있으면 채점에서 메모리 초과
-		q.pop();
-		for (int k = 0; k < 8; ++k)
-		{
-			int ww = first + around_w[k];
-			int hh = second + around_h[k];
-			if (island[ww][hh] == 1 && checked[ww][hh] == false) {
-				q.push(make_pair(ww, hh));
-				// checked[first][second] = true; 여기로 옮기면 안 나. 블로그에 정리할 것
-			}
+		int ww = j + around_w[k];
+		int hh = i + around_h[k];
+		if (island[ww][hh] == 1 && checked[ww][hh] == false) {
+			checked[ww][hh] = true;
+			DepthSearch(ww, hh);
 		}
 	}
 }
@@ -175,7 +108,8 @@ void ProblemSolved()
 		for (int i = 1; i <= h; ++i) {
 			for (int j = 1; j <= w; ++j) {
 				if (island[j][i] == 1 && checked[j][i] == false) {
-					BreadthFirstSearch(j, i);
+					checked[j][i] = true;
+					DepthSearch(j, i);
 					++count;
 				}
 			}
@@ -183,6 +117,72 @@ void ProblemSolved()
 		printf("%d\n", count);
 	}
 }
+
+/*
+1 1 1 1 1
+1 1 1 1 1
+1 0 1 0 1
+1 0 1 1 1
+*/
+// BFS
+//#include <queue>
+//using namespace std;
+//queue<pair<int, int>> q;
+//void BreadthFirstSearch(int j, int i)
+//{
+//	q.push(make_pair(j, i));
+//	while (!q.empty())
+//	{
+//		int first = q.front().first;
+//		int second = q.front().second;
+//		checked[first][second] = true; // 여기에 있으면 채점에서 메모리 초과
+//		q.pop();
+//		for (int k = 0; k < 8; ++k)
+//		{
+//			int ww = first + around_w[k];
+//			int hh = second + around_h[k];
+//			if (island[ww][hh] == 1 && checked[ww][hh] == false) {
+//				q.push(make_pair(ww, hh));
+//				// checked[first][second] = true; 여기로 옮기면 안 나. 블로그에 정리할 것
+//			}
+//		}
+//	}
+//}
+//void ProblemSolved()
+//{
+//	int w, h, count;
+//	while (true)
+//	{
+//		scanf("%d", &w); scanf("%d", &h);
+//		if (w == 0 && h == 0) 
+//			break;
+//		for (int i = 1; i <= 50; ++i) {
+//			for (int j = 1; j <= 50; ++j) {
+//				island[j][i] = 0;
+//			}
+//		}
+//		for (int i = 1; i <= h; ++i) {
+//			for (int j = 1; j <= w; ++j) {
+//				scanf("%d", &island[j][i]);
+//			}
+//		}
+//		for (int i = 0; i <= 51; ++i) {
+//			for (int j = 0; j <= 51; ++j) {
+//				checked[j][i] = false;
+//			}
+//		}
+//		count = 0;
+//		for (int i = 1; i <= h; ++i) {
+//			for (int j = 1; j <= w; ++j) {
+//				if (island[j][i] == 1 && checked[j][i] == false) {
+//					BreadthFirstSearch(j, i);
+//					++count;
+//				}
+//			}
+//		}
+//		printf("%d\n", count);
+//	}
+//}
 int main()
 {
 	ProblemSolved();
