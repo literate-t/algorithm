@@ -35,13 +35,13 @@
 32
 ```
 
+
+
 ## 풀이
 
 정렬한 상태에서 구하는 합이 가장 적다. 그러므로 정렬을 하고 답을 구하면 된다. 누적 합을 구하는 것이 아니라 누적 합의 누적합이다. 간단하게 1, 2, 3을 예로 들면 첫 번째 사람은 1분, 두 번째 사람은 1+2분, 세 번째 사람은 1+2+3분을 기다려야 하고 이들의 합을 구하는 것이므로 첫 번째 요소가 세 번, 두 번째 요소가 두 번, 세 번째 요소가 한 번 등장하는 규칙이 발견된다.
 
 ```java
-package algorithm;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
